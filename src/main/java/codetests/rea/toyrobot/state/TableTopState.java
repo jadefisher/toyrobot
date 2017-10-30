@@ -45,4 +45,10 @@ public class TableTopState {
 
     return new TableTopState(width, height, robotState.rotateRight());
   }
+
+  public TableTopState moveRobot() {
+    Objects.requireNonNull(robotState);
+
+    return new TableTopState(width, height, robotState.move());
+  }
 }
