@@ -17,4 +17,12 @@ public class DirectionTest {
     assertThat(Direction.SOUTH.left(), is(Direction.EAST));
     assertThat(Direction.WEST.left(), is(Direction.SOUTH));
   }
+
+  @Test
+  public void testRightRotation() {
+    assertThat(Direction.NORTH.right(), is(Direction.EAST));
+    assertThat(Direction.EAST.right(), is(Direction.SOUTH));
+    assertThat(Direction.SOUTH.right(), is(Direction.WEST));
+    assertThat(Direction.WEST.right(), is(Direction.NORTH));
+  }
 }

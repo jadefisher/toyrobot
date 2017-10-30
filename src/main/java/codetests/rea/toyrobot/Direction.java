@@ -28,6 +28,8 @@ public enum Direction {
   }
 
   public Direction right() {
-    return this;
+    final Integer numValues = Direction.values().length;
+    final Integer rightValue = ((this.value + 1) % numValues + numValues) % numValues;
+    return fromValue(rightValue);
   }
 }
