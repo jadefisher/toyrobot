@@ -33,4 +33,16 @@ public class TableTopStateTest {
     assertThat(initialState.place(Direction.WEST, -1, 2).isInvalid(), is(true));
     assertThat(initialState.place(Direction.WEST, 2, -1).isInvalid(), is(true));
   }
+
+  @Test
+  public void tableTopCanRotateRobotLeft() {
+    assertThat(initialState.place(Direction.NORTH, 0, 0).rotateRobotLeft().getRobotState(),
+        is(new RobotState(Direction.WEST, 0, 0)));
+  }
+
+  @Test
+  public void tableTopCanRotateRobotRight() {
+    assertThat(initialState.place(Direction.NORTH, 0, 0).rotateRobotRight().getRobotState(),
+        is(new RobotState(Direction.EAST, 0, 0)));
+  }
 }

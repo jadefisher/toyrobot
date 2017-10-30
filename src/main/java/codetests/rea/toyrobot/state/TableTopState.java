@@ -1,6 +1,7 @@
 package codetests.rea.toyrobot.state;
 
 import codetests.rea.toyrobot.Direction;
+import java.util.Objects;
 
 public class TableTopState {
   private final Integer width;
@@ -17,6 +18,10 @@ public class TableTopState {
     this.robotState = robotState;
   }
 
+  public RobotState getRobotState() {
+    return robotState;
+  }
+
   public boolean isInvalid() {
     return robotState == null ||
         robotState.getxPosition() >= width ||
@@ -27,5 +32,17 @@ public class TableTopState {
 
   public TableTopState place(final Direction direction, final Integer xPosition, final Integer yPosition) {
     return new TableTopState(width, height, new RobotState(direction, xPosition, yPosition));
+  }
+
+  public TableTopState rotateRobotLeft() {
+    Objects.requireNonNull(robotState);
+
+    return new TableTopState(width, height, robotState.rotateLeft());
+  }
+
+  public TableTopState rotateRobotRight() {
+    Objects.requireNonNull(robotState);
+
+    return new TableTopState(width, height, robotState.rotateRight());
   }
 }
