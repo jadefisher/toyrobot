@@ -18,7 +18,11 @@ public class TableTopState {
   }
 
   public boolean isInvalid() {
-    return robotState != null;
+    return robotState == null ||
+        robotState.getxPosition() >= width ||
+        robotState.getxPosition() < 0 ||
+        robotState.getyPosition() >= height ||
+        robotState.getyPosition() < 0;
   }
 
   public TableTopState place(final Direction direction, final Integer xPosition, final Integer yPosition) {
