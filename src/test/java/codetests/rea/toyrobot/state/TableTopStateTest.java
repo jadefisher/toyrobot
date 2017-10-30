@@ -56,12 +56,24 @@ public class TableTopStateTest {
   public void tableTopCanMoveRobotOffBoard() {
     assertThat(initialState
             .place(Direction.NORTH, 0, 0)
-            .moveRobot()
-            .moveRobot()
-            .moveRobot()
-            .moveRobot()
-            .moveRobot()
+            .moveRobot() // Move to 0, 1
+            .moveRobot() // Move to 0, 2
+            .moveRobot() // Move to 0, 3
+            .moveRobot() // Move to 0, 4
+            .moveRobot() // Move to 0, 5
             .isInvalid(),
         is(true));
+  }
+
+  @Test
+  public void tableTopResetsRobotOnPlace() {
+    assertThat(initialState
+            .place(Direction.NORTH, 0, 0)
+            .moveRobot()
+            .moveRobot()
+            .rotateRobotLeft()
+            .place(Direction.SOUTH, 2, 2)
+            .getRobotState(),
+        is(new RobotState(Direction.SOUTH, 2, 2)));
   }
 }
