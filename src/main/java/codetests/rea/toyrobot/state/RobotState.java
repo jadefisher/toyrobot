@@ -1,6 +1,7 @@
 package codetests.rea.toyrobot.state;
 
 import codetests.rea.toyrobot.Direction;
+import java.util.Objects;
 
 public class RobotState {
   private final Direction direction;
@@ -46,5 +47,24 @@ public class RobotState {
       default:
         throw new RuntimeException("Unknown direction: " + direction);
     }
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    RobotState that = (RobotState) o;
+    return direction == that.direction &&
+        Objects.equals(xPosition, that.xPosition) &&
+        Objects.equals(yPosition, that.yPosition);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(direction, xPosition, yPosition);
   }
 }
