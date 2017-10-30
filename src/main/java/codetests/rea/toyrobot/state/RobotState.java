@@ -28,4 +28,23 @@ public class RobotState {
   public RobotState rotateLeft() {
     return new RobotState(direction.left(), xPosition, yPosition);
   }
+
+  public RobotState rotateRight() {
+    return new RobotState(direction.right(), xPosition, yPosition);
+  }
+
+  public RobotState move() {
+    switch (direction) {
+      case NORTH:
+        return new RobotState(direction, xPosition, yPosition + 1);
+      case EAST:
+        return new RobotState(direction, xPosition + 1, yPosition);
+      case SOUTH:
+        return new RobotState(direction, xPosition, yPosition - 1);
+      case WEST:
+        return new RobotState(direction, xPosition - 1, yPosition);
+      default:
+        throw new RuntimeException("Unknown direction: " + direction);
+    }
+  }
 }
