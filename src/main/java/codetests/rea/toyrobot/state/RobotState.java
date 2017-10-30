@@ -26,6 +26,6 @@ public class RobotState {
   }
 
   public RobotState rotateLeft() {
-    return this;
+    return new RobotState(direction.left(), xPosition, yPosition);
   }
 }
