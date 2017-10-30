@@ -1,35 +1,49 @@
 package codetests.rea.toyrobot;
 
 public enum Direction {
-  NORTH(0),
-  EAST(1),
-  SOUTH(2),
-  WEST(3);
+  NORTH(0, 0, 1),
+  EAST(1, 1, 0),
+  SOUTH(2, 0, -1),
+  WEST(3, -1, 0);
 
-  private final Integer value;
+  private final Integer rotationalValue;
+  private final Integer xComponent;
+  private final Integer yComponent;
 
-  Direction(final Integer value) {
-    this.value = value;
-  }
-
-  private Direction fromValue(final Integer value) {
-    for (Direction direction : Direction.values()) {
-      if (direction.value == value) {
-        return direction;
-      }
-    }
-    throw new RuntimeException("Unknown direction value " + value);
+  Direction(final Integer rotationalValue,
+      final Integer xComponent,
+      final Integer yComponent) {
+    this.rotationalValue = rotationalValue;
+    this.xComponent = xComponent;
+    this.yComponent = yComponent;
   }
 
   public Direction left() {
     final Integer numValues = Direction.values().length;
-    final Integer leftValue = ((this.value - 1) % numValues + numValues) % numValues;
-    return fromValue(leftValue);
+    final Integer leftValue = ((this.rotationalValue - 1) % numValues + numValues) % numValues;
+    return fromRotationalValue(leftValue);
   }
 
   public Direction right() {
     final Integer numValues = Direction.values().length;
-    final Integer rightValue = ((this.value + 1) % numValues + numValues) % numValues;
-    return fromValue(rightValue);
+    final Integer rightValue = ((this.rotationalValue + 1) % numValues + numValues) % numValues;
+    return fromRotationalValue(rightValue);
+  }
+
+  public Integer getxComponent() {
+    return xComponent;
+  }
+
+  public Integer getyComponent() {
+    return yComponent;
+  }
+
+  private Direction fromRotationalValue(final Integer rotationalValue) {
+    for (Direction direction : Direction.values()) {
+      if (direction.rotationalValue == rotationalValue) {
+        return direction;
+      }
+    }
+    throw new RuntimeException("Unknown direction rotationalValue " + rotationalValue);
   }
 }

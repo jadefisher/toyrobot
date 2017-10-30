@@ -25,4 +25,20 @@ public class DirectionTest {
     assertThat(Direction.SOUTH.right(), is(Direction.WEST));
     assertThat(Direction.WEST.right(), is(Direction.NORTH));
   }
+
+  @Test
+  public void testXComponentValues() {
+    assertThat(Direction.NORTH.getxComponent(), is(0));
+    assertThat(Direction.EAST.getxComponent(), is(1));
+    assertThat(Direction.SOUTH.getxComponent(), is(0));
+    assertThat(Direction.WEST.getxComponent(), is(-1));
+  }
+
+  @Test
+  public void testYComponentValues() {
+    assertThat(Direction.NORTH.getyComponent(), is(1));
+    assertThat(Direction.EAST.getyComponent(), is(0));
+    assertThat(Direction.SOUTH.getyComponent(), is(-1));
+    assertThat(Direction.WEST.getyComponent(), is(0));
+  }
 }
