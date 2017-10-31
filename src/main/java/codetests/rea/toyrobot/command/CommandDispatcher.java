@@ -57,16 +57,17 @@ public class CommandDispatcher {
                     Integer x = Integer.valueOf(argumentMatcher.group(1));
                     Integer y = Integer.valueOf(argumentMatcher.group(2));
                     String directionString = argumentMatcher.group(3);
+                    Direction direction;
 
                     try {
-                      Direction direction = Direction.valueOf(directionString);
-
-                      return tableTopState.place(direction, x, y);
+                      direction = Direction.valueOf(directionString);
                     } catch (IllegalArgumentException e) {
                       throw new InvalidCommandException("Cannot parse direction '" +
                           directionString +
                           "'. It should be one of " + Arrays.asList(Direction.values()));
                     }
+
+                    return tableTopState.place(direction, x, y);
                   }
 
                   throw new InvalidCommandException("Require X,Y,F format for PLACE command");
@@ -90,6 +91,6 @@ public class CommandDispatcher {
 
               return tableTopState;
             })
-        ).collect(Collectors.toMap((e) -> e.getKey(), (e) -> e.getValue()));
+        ).collect(Collectors.toMap(SimpleEntry::getKey, SimpleEntry::getValue));
   }
 }
