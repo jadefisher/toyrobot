@@ -48,7 +48,10 @@ public class CommandFactory {
                     }
 
                     return tableTopState;
-                  })
+                  }),
+              new SimpleEntry<String, Command>(
+                  "LEFT", ((tableTopState, arguments) -> tableTopState.rotateRobotLeft())
+              )
           ).collect(Collectors.toMap((e) -> e.getKey(), (e) -> e.getValue()))
       );
     }
@@ -59,18 +62,17 @@ public class CommandFactory {
   public TableTopState apply(String command, TableTopState tableTopState) {
     Objects.requireNonNull(command, "Valid command required");
 
-    Matcher commandRegexMatcher = Pattern.compile("^(\\w+)\\s(.+)*$").matcher(command);
+    // split the command name and arguments (if any), on first whitespace
+    String[] commandParts = command.split("\\s", 2);
 
-    if (commandRegexMatcher.matches()) {
-      String commandName = commandRegexMatcher.group(1);
-      String arguments = commandRegexMatcher.group(2);
+    String commandName = commandParts[0];
+    String arguments = commandParts.length > 1 ? commandParts[1] : null;
 
-      if (commands.containsKey(commandName)) {
-        TableTopState newTableTopState = commands.get(commandName)
-            .execute(tableTopState, arguments);
+    if (commands.containsKey(commandName)) {
+      TableTopState newTableTopState = commands.get(commandName)
+          .execute(tableTopState, arguments);
 
-        return newTableTopState.isInvalid() ? tableTopState : newTableTopState;
-      }
+      return newTableTopState.isInvalid() ? tableTopState : newTableTopState;
     }
 
     return tableTopState;

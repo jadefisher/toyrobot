@@ -58,4 +58,14 @@ public class RobotState {
   public int hashCode() {
     return Objects.hash(direction, xPosition, yPosition);
   }
+
+  @Override
+  public String toString() {
+    final StringBuffer sb = new StringBuffer("RobotState{");
+    sb.append("direction=").append(direction);
+    sb.append(", xPosition=").append(xPosition);
+    sb.append(", yPosition=").append(yPosition);
+    sb.append('}');
+    return sb.toString();
+  }
 }

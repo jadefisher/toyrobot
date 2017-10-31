@@ -70,4 +70,15 @@ public class TableTopState {
   public int hashCode() {
     return Objects.hash(width, height, robotState);
   }
+
+  @Override
+  public String toString() {
+    final StringBuffer sb = new StringBuffer("TableTopState{");
+    sb.append("width=").append(width);
+    sb.append(", height=").append(height);
+    sb.append(", robotState=").append(robotState);
+    sb.append(", invalid=").append(isInvalid());
+    sb.append('}');
+    return sb.toString();
+  }
 }

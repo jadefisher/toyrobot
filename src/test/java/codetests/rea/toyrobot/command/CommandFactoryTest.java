@@ -33,8 +33,9 @@ public class CommandFactoryTest {
 
   @Test
   public void testPlaceCommandIsIgnoredIfOffTable() {
-    assertThat(commandFactory
-        .apply("PLACE 5,2,WEST", initialTableTopState), is(initialTableTopState));
+    assertThat(
+        commandFactory
+            .apply("PLACE 5,2,WEST", initialTableTopState), is(initialTableTopState));
   }
 
   @Test
@@ -43,11 +44,6 @@ public class CommandFactoryTest {
     assertThat(
         commandFactory
             .apply("PLACE 5,2,W", initialTableTopState), is(initialTableTopState));
-
-    // Missing arguments
-    assertThat(
-        commandFactory
-            .apply("PLACE", initialTableTopState), is(initialTableTopState));
 
     // Missing arguments
     assertThat(
@@ -63,5 +59,17 @@ public class CommandFactoryTest {
     assertThat(
         commandFactory
             .apply("PLACE 2,two,WEST", initialTableTopState), is(initialTableTopState));
+  }
+
+  @Test
+  public void testRotateLeftCommand() {
+    // Place robot
+    TableTopState tableTopState = commandFactory.apply("PLACE 2,2,NORTH", initialTableTopState);
+
+    // Rotate LEFT
+    tableTopState = commandFactory.apply("LEFT", tableTopState);
+
+    assertThat(tableTopState.isInvalid(), is(false));
+    assertThat(tableTopState.getRobotState(), is(new RobotState(Direction.WEST, 2, 2)));
   }
 }
