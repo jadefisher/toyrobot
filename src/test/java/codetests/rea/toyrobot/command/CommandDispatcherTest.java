@@ -10,7 +10,6 @@ import static org.mockito.Mockito.verify;
 import codetests.rea.toyrobot.Direction;
 import codetests.rea.toyrobot.state.RobotState;
 import codetests.rea.toyrobot.state.TableTopState;
-import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -35,7 +34,7 @@ public class CommandDispatcherTest {
     TableTopState tableTopState = commandDispatcher.apply("PLACE 2,2,NORTH", initialTableTopState);
 
     assertThat(tableTopState.isInvalid(), is(false));
-    assertThat(tableTopState.getRobotState(), is(new RobotState(Direction.NORTH, 2, 2)));
+    assertThat(tableTopState.getRobotState().get(), is(new RobotState(Direction.NORTH, 2, 2)));
   }
 
   @Test
@@ -77,7 +76,7 @@ public class CommandDispatcherTest {
     tableTopState = commandDispatcher.apply("LEFT", tableTopState);
 
     assertThat(tableTopState.isInvalid(), is(false));
-    assertThat(tableTopState.getRobotState(), is(new RobotState(Direction.WEST, 2, 2)));
+    assertThat(tableTopState.getRobotState().get(), is(new RobotState(Direction.WEST, 2, 2)));
   }
 
   @Test
@@ -97,7 +96,7 @@ public class CommandDispatcherTest {
     tableTopState = commandDispatcher.apply("RIGHT", tableTopState);
 
     assertThat(tableTopState.isInvalid(), is(false));
-    assertThat(tableTopState.getRobotState(), is(new RobotState(Direction.EAST, 2, 2)));
+    assertThat(tableTopState.getRobotState().get(), is(new RobotState(Direction.EAST, 2, 2)));
   }
 
   @Test
@@ -117,7 +116,7 @@ public class CommandDispatcherTest {
     tableTopState = commandDispatcher.apply("MOVE", tableTopState);
 
     assertThat(tableTopState.isInvalid(), is(false));
-    assertThat(tableTopState.getRobotState(), is(new RobotState(Direction.NORTH, 2, 3)));
+    assertThat(tableTopState.getRobotState().get(), is(new RobotState(Direction.NORTH, 2, 3)));
   }
 
   @Test
@@ -131,11 +130,18 @@ public class CommandDispatcherTest {
     }
 
     assertThat(tableTopState.isInvalid(), is(false));
-    assertThat(tableTopState.getRobotState(), is(new RobotState(Direction.NORTH, 0, 4)));
+    assertThat(tableTopState.getRobotState().get(), is(new RobotState(Direction.NORTH, 0, 4)));
   }
 
   @Test
-  public void testReportCommand() throws IOException {
+  public void testMoveCommandIsIgnoredWhenRobotNotPlaced() {
+    assertThat(
+        commandDispatcher
+            .apply("MOVE", initialTableTopState), is(initialTableTopState));
+  }
+
+  @Test
+  public void testReportCommand() {
     // Place robot
     TableTopState tableTopState = commandDispatcher.apply("PLACE 0,0,NORTH", initialTableTopState);
 
@@ -146,7 +152,7 @@ public class CommandDispatcherTest {
   }
 
   @Test
-  public void testReportCommandIsIgnoredWhenRobotNotPlaced() throws IOException {
+  public void testReportCommandIsIgnoredWhenRobotNotPlaced() {
     commandDispatcher.apply("REPORT", initialTableTopState);
 
     verify(reportingOutput, times(0)).report(anyString());

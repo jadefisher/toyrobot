@@ -6,6 +6,7 @@ import codetests.rea.toyrobot.state.TableTopState;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -79,11 +80,12 @@ public class CommandDispatcher {
             ),
             new SimpleEntry<String, Command>(
                 "REPORT", (tableTopState, arguments) -> {
-              RobotState robotState = tableTopState.getRobotState();
-              if (robotState != null) {
+              Optional<RobotState> robotState = tableTopState.getRobotState();
+              if (robotState.isPresent()) {
                 reportingOutput.report(
-                    robotState.getxPosition() + "," + robotState.getyPosition() + "," + robotState
-                        .getDirection());
+                    robotState.get().getxPosition() + "," + robotState.get().getyPosition() + ","
+                        + robotState
+                        .get().getDirection());
               }
               return tableTopState;
             })

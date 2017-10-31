@@ -36,19 +36,19 @@ public class TableTopStateTest {
 
   @Test
   public void tableTopCanRotateRobotLeft() {
-    assertThat(initialState.place(Direction.NORTH, 0, 0).rotateRobotLeft().getRobotState(),
+    assertThat(initialState.place(Direction.NORTH, 0, 0).rotateRobotLeft().getRobotState().get(),
         is(new RobotState(Direction.WEST, 0, 0)));
   }
 
   @Test
   public void tableTopCanRotateRobotRight() {
-    assertThat(initialState.place(Direction.NORTH, 0, 0).rotateRobotRight().getRobotState(),
+    assertThat(initialState.place(Direction.NORTH, 0, 0).rotateRobotRight().getRobotState().get(),
         is(new RobotState(Direction.EAST, 0, 0)));
   }
 
   @Test
   public void tableTopCanMoveRobot() {
-    assertThat(initialState.place(Direction.NORTH, 0, 0).moveRobot().getRobotState(),
+    assertThat(initialState.place(Direction.NORTH, 0, 0).moveRobot().getRobotState().get(),
         is(new RobotState(Direction.NORTH, 0, 1)));
   }
 
@@ -73,7 +73,8 @@ public class TableTopStateTest {
             .moveRobot()
             .rotateRobotLeft()
             .place(Direction.SOUTH, 2, 2)
-            .getRobotState(),
+            .getRobotState()
+            .get(),
         is(new RobotState(Direction.SOUTH, 2, 2)));
   }
 }
