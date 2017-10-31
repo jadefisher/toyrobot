@@ -112,4 +112,18 @@ public class CommandFactoryTest {
     assertThat(tableTopState.isInvalid(), is(false));
     assertThat(tableTopState.getRobotState(), is(new RobotState(Direction.NORTH, 2, 3)));
   }
+
+  @Test
+  public void testMoveCommandIsIgnoredIfResultsInRobotOffTable() {
+    // Place robot
+    TableTopState tableTopState = commandFactory.apply("PLACE 0,0,NORTH", initialTableTopState);
+
+    // Keep moving NORTH way beyond the boundary
+    for (int i = 0; i < 10; i++) {
+      tableTopState = commandFactory.apply("MOVE", tableTopState);
+    }
+
+    assertThat(tableTopState.isInvalid(), is(false));
+    assertThat(tableTopState.getRobotState(), is(new RobotState(Direction.NORTH, 0, 4)));
+  }
 }
