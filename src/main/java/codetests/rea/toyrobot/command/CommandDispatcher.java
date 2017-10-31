@@ -1,12 +1,10 @@
 package codetests.rea.toyrobot.command;
 
 import codetests.rea.toyrobot.Direction;
-import codetests.rea.toyrobot.state.RobotState;
 import codetests.rea.toyrobot.state.TableTopState;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -80,13 +78,11 @@ public class CommandDispatcher {
             ),
             new SimpleEntry<String, Command>(
                 "REPORT", (tableTopState, arguments) -> {
-              Optional<RobotState> robotState = tableTopState.getRobotState();
-              if (robotState.isPresent()) {
-                reportingOutput.report(
-                    robotState.get().getxPosition() + "," + robotState.get().getyPosition() + ","
-                        + robotState
-                        .get().getDirection());
-              }
+              tableTopState.getRobotState().ifPresent((robot) -> reportingOutput.report(
+                  robot.getxPosition() + "," + robot.getyPosition() + ","
+                      + robot.getDirection())
+              );
+
               return tableTopState;
             })
         ).collect(Collectors.toMap((e) -> e.getKey(), (e) -> e.getValue()));
