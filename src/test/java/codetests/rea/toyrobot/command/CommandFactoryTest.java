@@ -100,4 +100,16 @@ public class CommandFactoryTest {
         commandFactory
             .apply("RIGHT", initialTableTopState), is(initialTableTopState));
   }
+
+  @Test
+  public void testMoveCommand() {
+    // Place robot
+    TableTopState tableTopState = commandFactory.apply("PLACE 2,2,NORTH", initialTableTopState);
+
+    // Move robot
+    tableTopState = commandFactory.apply("MOVE", tableTopState);
+
+    assertThat(tableTopState.isInvalid(), is(false));
+    assertThat(tableTopState.getRobotState(), is(new RobotState(Direction.NORTH, 2, 3)));
+  }
 }
