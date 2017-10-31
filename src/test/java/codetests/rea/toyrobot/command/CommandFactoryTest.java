@@ -72,4 +72,32 @@ public class CommandFactoryTest {
     assertThat(tableTopState.isInvalid(), is(false));
     assertThat(tableTopState.getRobotState(), is(new RobotState(Direction.WEST, 2, 2)));
   }
+
+  @Test
+  public void testRotateLeftCommandIsIgnoredIfRobotNotPlaced() {
+    // Rotate LEFT
+    assertThat(
+        commandFactory
+            .apply("LEFT", initialTableTopState), is(initialTableTopState));
+  }
+
+  @Test
+  public void testRotateRightCommand() {
+    // Place robot
+    TableTopState tableTopState = commandFactory.apply("PLACE 2,2,NORTH", initialTableTopState);
+
+    // Rotate LEFT
+    tableTopState = commandFactory.apply("RIGHT", tableTopState);
+
+    assertThat(tableTopState.isInvalid(), is(false));
+    assertThat(tableTopState.getRobotState(), is(new RobotState(Direction.EAST, 2, 2)));
+  }
+
+  @Test
+  public void testRotateRightCommandIsIgnoredIfRobotNotPlaced() {
+    // Rotate LEFT
+    assertThat(
+        commandFactory
+            .apply("RIGHT", initialTableTopState), is(initialTableTopState));
+  }
 }

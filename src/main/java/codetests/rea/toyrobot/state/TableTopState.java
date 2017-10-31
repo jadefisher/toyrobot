@@ -35,15 +35,11 @@ public class TableTopState {
   }
 
   public TableTopState rotateRobotLeft() {
-    Objects.requireNonNull(robotState);
-
-    return new TableTopState(width, height, robotState.rotateLeft());
+    return robotState == null ? this : new TableTopState(width, height, robotState.rotateLeft());
   }
 
   public TableTopState rotateRobotRight() {
-    Objects.requireNonNull(robotState);
-
-    return new TableTopState(width, height, robotState.rotateRight());
+    return robotState == null ? this : new TableTopState(width, height, robotState.rotateRight());
   }
 
   public TableTopState moveRobot() {

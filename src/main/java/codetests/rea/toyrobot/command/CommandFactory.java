@@ -48,9 +48,13 @@ public class CommandFactory {
                     }
 
                     return tableTopState;
-                  }),
+                  }
+              ),
               new SimpleEntry<String, Command>(
                   "LEFT", ((tableTopState, arguments) -> tableTopState.rotateRobotLeft())
+              ),
+              new SimpleEntry<String, Command>(
+                  "RIGHT", ((tableTopState, arguments) -> tableTopState.rotateRobotRight())
               )
           ).collect(Collectors.toMap((e) -> e.getKey(), (e) -> e.getValue()))
       );
