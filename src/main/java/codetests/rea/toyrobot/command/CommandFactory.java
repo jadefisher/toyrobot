@@ -37,9 +37,14 @@ public class CommandFactory {
                     if (argumentMatcher.matches()) {
                       Integer x = Integer.valueOf(argumentMatcher.group(1));
                       Integer y = Integer.valueOf(argumentMatcher.group(2));
-                      Direction direction = Direction.valueOf(argumentMatcher.group(3));
 
-                      return tableTopState.place(direction, x, y);
+                      try {
+                        Direction direction = Direction.valueOf(argumentMatcher.group(3));
+
+                        return tableTopState.place(direction, x, y);
+                      } catch (IllegalArgumentException e) {
+                        // ignore unparsable direction enum
+                      }
                     }
 
                     return tableTopState;

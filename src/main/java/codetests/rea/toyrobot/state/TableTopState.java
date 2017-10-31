@@ -51,4 +51,23 @@ public class TableTopState {
 
     return new TableTopState(width, height, robotState.move());
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    TableTopState that = (TableTopState) o;
+    return Objects.equals(width, that.width) &&
+        Objects.equals(height, that.height) &&
+        Objects.equals(robotState, that.robotState);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(width, height, robotState);
+  }
 }
