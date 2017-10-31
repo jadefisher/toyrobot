@@ -2,6 +2,7 @@ package codetests.rea.toyrobot.command;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -142,5 +143,12 @@ public class CommandDispatcherTest {
     commandDispatcher.apply("REPORT", tableTopState);
 
     verify(reportingOutput, times(1)).report("0,0,NORTH");
+  }
+
+  @Test
+  public void testReportCommandIsIgnoredWhenRobotNotPlaced() throws IOException {
+    commandDispatcher.apply("REPORT", initialTableTopState);
+
+    verify(reportingOutput, times(0)).report(anyString());
   }
 }
