@@ -8,10 +8,13 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import codetests.rea.toyrobot.Direction;
+import codetests.rea.toyrobot.InvalidCommandException;
 import codetests.rea.toyrobot.state.RobotState;
 import codetests.rea.toyrobot.state.TableTopState;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 /**
  * Unit Tests for the Command Factory
@@ -21,6 +24,9 @@ public class CommandDispatcherTest {
   private TableTopState initialTableTopState;
   private CommandDispatcher commandDispatcher;
   private ReportingOutput reportingOutput;
+
+  @Rule
+  public ExpectedException thrown = ExpectedException.none();
 
   @Before
   public void setUp() {
@@ -45,26 +51,32 @@ public class CommandDispatcherTest {
   }
 
   @Test
-  public void testUnparsablePlaceCommandIsIgnored() {
-    // Bad Direction
-    assertThat(
-        commandDispatcher
-            .apply("PLACE 5,2,W", initialTableTopState), is(initialTableTopState));
+  public void testUnparsableDirectionPlaceCommandIsHandled() {
+    thrown.expect(InvalidCommandException.class);
+    thrown.expectMessage(
+        "Cannot parse direction 'W'. It should be one of [NORTH, EAST, SOUTH, WEST]");
+    commandDispatcher.apply("PLACE 5,2,W", initialTableTopState);
+  }
 
-    // Missing arguments
-    assertThat(
-        commandDispatcher
-            .apply("PLACE 5,WEST", initialTableTopState), is(initialTableTopState));
+  @Test
+  public void testMissingArgumentsPlaceCommandIsHandled() {
+    thrown.expect(InvalidCommandException.class);
+    thrown.expectMessage("Require X,Y,F format for PLACE command");
+    commandDispatcher.apply("PLACE 5,WEST", initialTableTopState);
+  }
 
-    // Bad number for x
-    assertThat(
-        commandDispatcher
-            .apply("PLACE two,2,WEST", initialTableTopState), is(initialTableTopState));
+  @Test
+  public void testIntegerParseErrorForXPlaceCommandIsHandled() {
+    thrown.expect(InvalidCommandException.class);
+    thrown.expectMessage("Require X,Y,F format for PLACE command");
+    commandDispatcher.apply("PLACE two,2,WEST", initialTableTopState);
+  }
 
-    // Bad number for y
-    assertThat(
-        commandDispatcher
-            .apply("PLACE 2,two,WEST", initialTableTopState), is(initialTableTopState));
+  @Test
+  public void testIntegerParseErrorForYPlaceCommandIsHandled() {
+    thrown.expect(InvalidCommandException.class);
+    thrown.expectMessage("Require X,Y,F format for PLACE command");
+    commandDispatcher.apply("PLACE 2,two,WEST", initialTableTopState);
   }
 
   @Test

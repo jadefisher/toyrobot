@@ -1,8 +1,10 @@
 package codetests.rea.toyrobot.command;
 
 import codetests.rea.toyrobot.Direction;
+import codetests.rea.toyrobot.InvalidCommandException;
 import codetests.rea.toyrobot.state.TableTopState;
 import java.util.AbstractMap.SimpleEntry;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Matcher;
@@ -22,7 +24,7 @@ public class CommandDispatcher {
   }
 
   public TableTopState apply(String command, TableTopState tableTopState) {
-    Objects.requireNonNull(command, "Valid command required");
+    Objects.requireNonNull(command, "Cannot execute null command");
 
     // split the command name and arguments (if any), on first whitespace
     String[] commandParts = command.split("\\s", 2);
@@ -37,7 +39,7 @@ public class CommandDispatcher {
       return newTableTopState.isInvalid() ? tableTopState : newTableTopState;
     }
 
-    return tableTopState;
+    throw new InvalidCommandException("Cannot interpret command " + command);
   }
 
   private Map<String, Command> getCommands(final ReportingOutput reportingOutput) {
@@ -54,17 +56,20 @@ public class CommandDispatcher {
                   if (argumentMatcher.matches()) {
                     Integer x = Integer.valueOf(argumentMatcher.group(1));
                     Integer y = Integer.valueOf(argumentMatcher.group(2));
+                    String directionString = argumentMatcher.group(3);
 
                     try {
-                      Direction direction = Direction.valueOf(argumentMatcher.group(3));
+                      Direction direction = Direction.valueOf(directionString);
 
                       return tableTopState.place(direction, x, y);
                     } catch (IllegalArgumentException e) {
-                      // ignore unparsable direction enum
+                      throw new InvalidCommandException("Cannot parse direction '" +
+                          directionString +
+                          "'. It should be one of " + Arrays.asList(Direction.values()));
                     }
                   }
 
-                  return tableTopState;
+                  throw new InvalidCommandException("Require X,Y,F format for PLACE command");
                 }
             ),
             new SimpleEntry<String, Command>(
