@@ -35,10 +35,12 @@ public class ToyRobotRunner {
     TableTopState tableTopState = new TableTopState(width, height);
     CommandDispatcher commandDispatcher = new CommandDispatcher(reportingStream::println);
 
+    String command;
+
     try {
-      while (commandStream.ready()) {
+      while ((command = commandStream.readLine()) != null) {
         try {
-          tableTopState = commandDispatcher.apply(commandStream.readLine(), tableTopState);
+          tableTopState = commandDispatcher.apply(command, tableTopState);
         } catch (InvalidCommandException e) {
           System.err.println(e.getMessage());
         }
