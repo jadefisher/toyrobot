@@ -39,7 +39,7 @@ public class CommandDispatcher {
       return newTableTopState.isInvalid() ? tableTopState : newTableTopState;
     }
 
-    throw new InvalidCommandException("Cannot interpret command " + command);
+    throw new InvalidCommandException("Cannot interpret command '" + command + "'");
   }
 
   private Map<String, Command> getCommands(final ReportingOutput reportingOutput) {
