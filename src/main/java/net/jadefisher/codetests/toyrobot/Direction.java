@@ -1,4 +1,4 @@
-package codetests.rea.toyrobot;
+package net.jadefisher.codetests.toyrobot;
 
 public enum Direction {
   NORTH(0, 0, 1),

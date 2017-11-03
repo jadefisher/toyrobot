@@ -1,4 +1,4 @@
-package codetests.rea.toyrobot.command;
+package net.jadefisher.codetests.toyrobot.command;
 
 /**
  * Handler for reporting output

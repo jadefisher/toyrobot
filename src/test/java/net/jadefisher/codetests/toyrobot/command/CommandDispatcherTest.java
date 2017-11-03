@@ -1,4 +1,4 @@
-package codetests.rea.toyrobot.command;
+package net.jadefisher.codetests.toyrobot.command;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -7,10 +7,11 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-import codetests.rea.toyrobot.Direction;
-import codetests.rea.toyrobot.InvalidCommandException;
-import codetests.rea.toyrobot.state.RobotState;
-import codetests.rea.toyrobot.state.TableTopState;
+import net.jadefisher.codetests.toyrobot.Direction;
+import net.jadefisher.codetests.toyrobot.InvalidCommandException;
+import net.jadefisher.codetests.toyrobot.state.RobotState;
+import net.jadefisher.codetests.toyrobot.state.TableTopState;
+import org.hamcrest.CoreMatchers;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -40,7 +41,8 @@ public class CommandDispatcherTest {
     TableTopState tableTopState = commandDispatcher.apply("PLACE 2,2,NORTH", initialTableTopState);
 
     assertThat(tableTopState.isInvalid(), is(false));
-    assertThat(tableTopState.getRobotState().get(), is(new RobotState(Direction.NORTH, 2, 2)));
+    assertThat(tableTopState.getRobotState().get(), CoreMatchers
+        .is(new RobotState(Direction.NORTH, 2, 2)));
   }
 
   @Test

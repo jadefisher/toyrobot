@@ -1,7 +1,7 @@
-package codetests.rea.toyrobot;
+package net.jadefisher.codetests.toyrobot;
 
-import codetests.rea.toyrobot.command.CommandDispatcher;
-import codetests.rea.toyrobot.state.TableTopState;
+import net.jadefisher.codetests.toyrobot.command.CommandDispatcher;
+import net.jadefisher.codetests.toyrobot.state.TableTopState;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;

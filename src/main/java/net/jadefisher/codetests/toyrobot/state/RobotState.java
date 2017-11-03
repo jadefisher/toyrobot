@@ -1,6 +1,6 @@
-package codetests.rea.toyrobot.state;
+package net.jadefisher.codetests.toyrobot.state;
 
-import codetests.rea.toyrobot.Direction;
+import net.jadefisher.codetests.toyrobot.Direction;
 import java.util.Objects;
 
 public class RobotState {

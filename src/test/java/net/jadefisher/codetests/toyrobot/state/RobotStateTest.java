@@ -1,9 +1,9 @@
-package codetests.rea.toyrobot.state;
+package net.jadefisher.codetests.toyrobot.state;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-import codetests.rea.toyrobot.Direction;
+import net.jadefisher.codetests.toyrobot.Direction;
 import org.junit.Before;
 import org.junit.Test;
 

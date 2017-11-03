@@ -1,4 +1,4 @@
-package codetests.rea.toyrobot;
+package net.jadefisher.codetests.toyrobot;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;

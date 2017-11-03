@@ -2,7 +2,7 @@
 apply plugin: 'java'
 apply plugin: 'application'
 
-mainClassName = 'codetests.rea.toyrobot.ToyRobotRunner'
+mainClassName = 'net.jadefisher.codetests.toyrobot.ToyRobotRunner'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8

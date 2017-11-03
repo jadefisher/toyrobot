@@ -1,6 +1,6 @@
-package codetests.rea.toyrobot.command;
+package net.jadefisher.codetests.toyrobot.command;
 
-import codetests.rea.toyrobot.state.TableTopState;
+import net.jadefisher.codetests.toyrobot.state.TableTopState;
 
 /**
  * Command interface to perform commands on the TableTopState

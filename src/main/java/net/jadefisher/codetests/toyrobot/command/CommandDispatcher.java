@@ -1,8 +1,8 @@
-package codetests.rea.toyrobot.command;
+package net.jadefisher.codetests.toyrobot.command;
 
-import codetests.rea.toyrobot.Direction;
-import codetests.rea.toyrobot.InvalidCommandException;
-import codetests.rea.toyrobot.state.TableTopState;
+import net.jadefisher.codetests.toyrobot.Direction;
+import net.jadefisher.codetests.toyrobot.InvalidCommandException;
+import net.jadefisher.codetests.toyrobot.state.TableTopState;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.Arrays;
 import java.util.Map;
