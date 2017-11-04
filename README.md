@@ -40,6 +40,10 @@ Or with a file:
 
     ./gradlew run -q < sample_input.txt
 
+Expected output:
+
+    3,3,NORTH
+    
 Design
 ------
 The main classes are:
