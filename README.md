@@ -70,36 +70,34 @@ the robot is off the table.
 -- It just holds the robot's position and direction. It provides the behaviour of turning LEFT
 and RIGHT, and also the behavior of MOVEing in the direction the robot is facing.
 
-
-                                                                              
-                                                                              
-    +----------------------------+                                                
-    |                            |                                                
-    |                            |          Creates Initial State                 
-    |        ToyRobotRunner      ------------------------------+                  
-    |                            |                             |                  
-    |                            |                             |                  
-    +--------------|-------------+                             |                  
-                   |                                           |                  
-                   |Delegates stream input to                  |                  
-                   |                                           |                  
-    +--------------|-------------+              +--------------|-------------+    
-    |                            |              |                            |    
-    |                            |              |                            |    
-    |      CommandDispatcher     ----------------       TableTopState        |    
-    |                            |   Executes   |                            |    
-    |                            |   commands   |                            |    
-    +----------------------------+              +--------------|-------------+    
-                                                               |                  
-                                                               |                  
-                                                               | Delegates actions
-                                                               |                  
-                                                               |                  
-                                                +--------------|-------------+    
-                                                |                            |    
-                                                |                            |    
-                                                |        RobotState          |    
-                                                |                            |    
-                                                |                            |    
-                                                +----------------------------+    
-
+```
++----------------------------+                                                
+|                            |                                                
+|                            |          Creates Initial State                 
+|        ToyRobotRunner      ------------------------------+                  
+|                            |                             |                  
+|                            |                             |                  
++--------------|-------------+                             |                  
+               |                                           |                  
+               |Delegates stream input to                  |                  
+               |                                           |                  
++--------------|-------------+              +--------------|-------------+    
+|                            |              |                            |    
+|                            |              |                            |    
+|      CommandDispatcher     ----------------       TableTopState        |    
+|                            |   Executes   |                            |    
+|                            |   commands   |                            |    
++----------------------------+              +--------------|-------------+    
+                                                           |                  
+                                                           |                  
+                                                           | Delegates actions
+                                                           |                  
+                                                           |                  
+                                            +--------------|-------------+    
+                                            |                            |    
+                                            |                            |    
+                                            |        RobotState          |    
+                                            |                            |    
+                                            |                            |    
+                                            +----------------------------+    
+```
