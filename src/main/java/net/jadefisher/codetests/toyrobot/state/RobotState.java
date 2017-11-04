@@ -3,7 +3,14 @@ package net.jadefisher.codetests.toyrobot.state;
 import net.jadefisher.codetests.toyrobot.Direction;
 import java.util.Objects;
 
+/**
+ * Holds the state of the Robot, that is it's position and direction. Also provides
+ * behavior to support rotating left and right, and also supports moving in the forward direction.
+ *
+ * This class is immutable, so all state is provided in the constructor.
+ */
 public class RobotState {
+
   private final Direction direction;
   private final Integer xPosition;
   private final Integer yPosition;

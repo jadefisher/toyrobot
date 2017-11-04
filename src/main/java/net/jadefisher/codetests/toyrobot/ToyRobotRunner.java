@@ -9,6 +9,15 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 
+/**
+ * Runner for the Toy Robot simulation. Invoking the static main method will run the
+ * toy robot using stdin for command input, and stdout for reporting output.
+ *
+ * The Runner will also always create a 5x5 tabletop.
+ *
+ * Since the command input is taken from stdin, the CLI can run interactively or with a file
+ * piped in.
+ */
 public class ToyRobotRunner {
 
   private final Integer width;
@@ -31,6 +40,9 @@ public class ToyRobotRunner {
     new ToyRobotRunner(5, 5, System.in, System.out).run();
   }
 
+  /**
+   * Continues to process command input, line by line, until the input stream is closed.
+   */
   public void run() {
     TableTopState tableTopState = new TableTopState(width, height);
     CommandDispatcher commandDispatcher = new CommandDispatcher(reportingStream::println);
@@ -47,6 +59,7 @@ public class ToyRobotRunner {
       }
     } catch (IOException e) {
       System.err.println("Exception reading input " + e.getCause());
+      System.exit(1);
     }
   }
 }

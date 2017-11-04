@@ -9,6 +9,7 @@ import static org.mockito.Mockito.verify;
 
 import net.jadefisher.codetests.toyrobot.Direction;
 import net.jadefisher.codetests.toyrobot.InvalidCommandException;
+import net.jadefisher.codetests.toyrobot.command.CommandDispatcher.ReportingOutput;
 import net.jadefisher.codetests.toyrobot.state.RobotState;
 import net.jadefisher.codetests.toyrobot.state.TableTopState;
 import org.hamcrest.CoreMatchers;
@@ -18,7 +19,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 /**
- * Unit Tests for the Command Factory
+ * Unit Tests for the CommandDispatcher
  */
 public class CommandDispatcherTest {
 

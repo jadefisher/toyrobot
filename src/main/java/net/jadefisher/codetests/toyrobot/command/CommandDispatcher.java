@@ -13,7 +13,12 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * Implementation of the CommandFactory
+ * Implementation of the CommandDispatcher that parses each command input and attempts to
+ * execute the appropriate command if known.
+ *
+ * The apply method takes in a TableTopState and returns a TableTopState which is the new
+ * state after the command has executed. If the command resulted in an invalid state,
+ * the existing state is returned.
  */
 public class CommandDispatcher {
 
@@ -92,5 +97,17 @@ public class CommandDispatcher {
               return tableTopState;
             })
         ).collect(Collectors.toMap(SimpleEntry::getKey, SimpleEntry::getValue));
+  }
+
+  @FunctionalInterface
+  public interface Command {
+
+    TableTopState execute(TableTopState tableTopState, String arguments);
+  }
+
+  @FunctionalInterface
+  public interface ReportingOutput {
+
+    void report(String reportingMessage);
   }
 }

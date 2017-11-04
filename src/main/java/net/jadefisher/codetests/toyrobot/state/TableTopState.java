@@ -4,6 +4,13 @@ import net.jadefisher.codetests.toyrobot.Direction;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Holds the size of the tabletop, optionally the robot (if placed), behavior to place the robot,
+ * delegation behavior to move and rotate the robot, and logic as to if the current state
+ * (tabletop and robot) is valid.
+ *
+ * This class is immutable, so all state is provided in the constructor.
+ */
 public class TableTopState {
 
   private final Integer width;
@@ -20,6 +27,11 @@ public class TableTopState {
     this.robotState = robotState;
   }
 
+  /**
+   * The RobotState may or may not have been placed, and therefore this is optional.
+   *
+   * @return Optional of RobotState.
+   */
   public Optional<RobotState> getRobotState() {
     return Optional.ofNullable(robotState);
   }
