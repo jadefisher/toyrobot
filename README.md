@@ -5,6 +5,10 @@ Description
 -----------
 This is an implementation of the Toy Robot Simulator for a job application code test.
 
+Requirements
+------------
+Java 8 is required run this application.
+
 Running
 -----
 
