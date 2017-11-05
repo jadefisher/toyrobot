@@ -2,21 +2,19 @@ package net.jadefisher.codetests.toyrobot;
 
 /**
  * All the valid directions which the Robot can face.
+ * Note, they are declared in clockwise order so that the ordinal values allow
+ * determination of the LEFT and RIGHT Directions, from a given direction.
  */
 public enum Direction {
-  NORTH(0, 0, 1),
-  EAST(1, 1, 0),
-  SOUTH(2, 0, -1),
-  WEST(3, -1, 0);
+  NORTH(0, 1),
+  EAST(1, 0),
+  SOUTH(0, -1),
+  WEST(-1, 0);
 
-  private final Integer rotationalValue;
   private final Integer xComponent;
   private final Integer yComponent;
 
-  Direction(final Integer rotationalValue,
-      final Integer xComponent,
-      final Integer yComponent) {
-    this.rotationalValue = rotationalValue;
+  Direction(final Integer xComponent, final Integer yComponent) {
     this.xComponent = xComponent;
     this.yComponent = yComponent;
   }
@@ -26,8 +24,8 @@ public enum Direction {
    */
   public Direction left() {
     final Integer numValues = Direction.values().length;
-    final Integer leftValue = ((this.rotationalValue - 1) % numValues + numValues) % numValues;
-    return fromRotationalValue(leftValue);
+    final Integer leftOrdinal = ((this.ordinal() - 1) % numValues + numValues) % numValues;
+    return Direction.values()[leftOrdinal];
   }
 
   /**
@@ -35,8 +33,8 @@ public enum Direction {
    */
   public Direction right() {
     final Integer numValues = Direction.values().length;
-    final Integer rightValue = ((this.rotationalValue + 1) % numValues + numValues) % numValues;
-    return fromRotationalValue(rightValue);
+    final Integer rightOrdinal = ((this.ordinal() + 1) % numValues + numValues) % numValues;
+    return Direction.values()[rightOrdinal];
   }
 
   /**
@@ -51,14 +49,5 @@ public enum Direction {
    */
   public Integer getyComponent() {
     return yComponent;
-  }
-
-  private Direction fromRotationalValue(final Integer rotationalValue) {
-    for (Direction direction : Direction.values()) {
-      if (direction.rotationalValue == rotationalValue) {
-        return direction;
-      }
-    }
-    throw new RuntimeException("Unknown direction rotationalValue " + rotationalValue);
   }
 }
