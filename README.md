@@ -7,7 +7,7 @@ This is an implementation of the Toy Robot Simulator for a job application code 
 
 Requirements
 ------------
-Java 8 is required run this application.
+Java 8 is required run this application...
 
 Running
 ------
